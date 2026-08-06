@@ -1,0 +1,125 @@
+{
+  "generated_at": "2026-08-06T00:32:01.823137+00:00",
+  "total_tests": 8,
+  "passed": 8,
+  "needs_review_or_failed": 0,
+  "results": [
+    {
+      "id": "BASIC-001",
+      "question": "What was Apple's revenue in 2024?",
+      "generated_sql": "SELECT \"company_name\", \"fiscal_year\", \"metric_name\", \"metric_value\", \"unit\" FROM analytics.company_financial_metrics WHERE \"company_name\" = 'Apple' AND \"fiscal_year\" = 2024 AND \"fiscal_period\" = 'FY' AND \"metric_name\" = 'revenue' LIMIT 100;",
+      "status": "PASS",
+      "checks": {
+        "sql_generated": true,
+        "uses_expected_table": true,
+        "read_only": true,
+        "company": true,
+        "metric": true,
+        "year": true
+      },
+      "passed": true
+    },
+    {
+      "id": "BASIC-002",
+      "question": "Show Microsoft's net income from 2022 through 2025.",
+      "generated_sql": "SELECT \"company_name\", \"fiscal_year\", \"metric_name\", \"metric_value\", \"unit\" FROM analytics.company_financial_metrics WHERE \"company_name\" = 'Microsoft' AND \"fiscal_year\" BETWEEN 2022 AND 2025 AND \"fiscal_period\" = 'FY' AND \"metric_name\" = 'net_income' ORDER BY \"fiscal_year\";",
+      "status": "PASS",
+      "checks": {
+        "sql_generated": true,
+        "uses_expected_table": true,
+        "read_only": true,
+        "company": true,
+        "metric": true,
+        "start_year": true,
+        "end_year": true
+      },
+      "passed": true
+    },
+    {
+      "id": "BASIC-003",
+      "question": "Compare the five companies by revenue in 2024.",
+      "generated_sql": "SELECT \"company_name\", \"metric_value\", \"unit\" FROM analytics.company_financial_metrics WHERE fiscal_year = 2024 AND fiscal_period = 'FY' AND metric_name = 'revenue' ORDER BY \"metric_value\" DESC;",
+      "status": "PASS",
+      "checks": {
+        "sql_generated": true,
+        "uses_expected_table": true,
+        "read_only": true,
+        "metric": true,
+        "year": true
+      },
+      "passed": true
+    },
+    {
+      "id": "BASIC-004",
+      "question": "What were Amazon's total assets in 2023?",
+      "generated_sql": "SELECT \"company_name\", \"fiscal_year\", \"metric_name\", \"metric_value\", \"unit\" FROM analytics.company_financial_metrics WHERE \"company_name\" = 'Amazon' AND \"fiscal_year\" = 2023 AND \"fiscal_period\" = 'FY' AND \"metric_name\" = 'total_assets' LIMIT 100;",
+      "status": "PASS",
+      "checks": {
+        "sql_generated": true,
+        "uses_expected_table": true,
+        "read_only": true,
+        "company": true,
+        "metric": true,
+        "year": true
+      },
+      "passed": true
+    },
+    {
+      "id": "BASIC-005",
+      "question": "Show Meta's cash and cash equivalents in 2024.",
+      "generated_sql": "SELECT \"company_name\", \"fiscal_year\", \"metric_name\", \"metric_value\", \"unit\" FROM analytics.company_financial_metrics WHERE \"company_name\" = 'Meta' AND \"fiscal_year\" = 2024 AND \"fiscal_period\" = 'FY' AND \"metric_name\" = 'cash_and_cash_equivalents' LIMIT 100;",
+      "status": "PASS",
+      "checks": {
+        "sql_generated": true,
+        "uses_expected_table": true,
+        "read_only": true,
+        "company": true,
+        "metric": true,
+        "year": true
+      },
+      "passed": true
+    },
+    {
+      "id": "BASIC-006",
+      "question": "Which company had the highest operating cash flow in 2024?",
+      "generated_sql": "SELECT \"company_name\", \"metric_value\", \"unit\" FROM analytics.company_financial_metrics WHERE \"fiscal_year\" = 2024 AND \"fiscal_period\" = 'FY' AND \"metric_name\" = 'operating_cash_flow' ORDER BY \"metric_value\" DESC LIMIT 1;",
+      "status": "PASS",
+      "checks": {
+        "sql_generated": true,
+        "uses_expected_table": true,
+        "read_only": true,
+        "metric": true,
+        "year": true
+      },
+      "passed": true
+    },
+    {
+      "id": "BASIC-007",
+      "question": "Show Alphabet's total liabilities for 2022 and 2023.",
+      "generated_sql": "SELECT \"company_name\", \"fiscal_year\", \"metric_name\", \"metric_value\", \"unit\" FROM analytics.company_financial_metrics WHERE \"company_name\" = 'Alphabet' AND \"fiscal_year\" IN (2022, 2023) AND \"fiscal_period\" = 'FY' AND \"metric_name\" = 'total_liabilities' ORDER BY \"fiscal_year\";",
+      "status": "PASS",
+      "checks": {
+        "sql_generated": true,
+        "uses_expected_table": true,
+        "read_only": true,
+        "company": true,
+        "metric": true
+      },
+      "passed": true
+    },
+    {
+      "id": "BASIC-008",
+      "question": "List Apple's stockholders' equity from 2022 through 2025.",
+      "generated_sql": "SELECT \"company_name\", \"fiscal_year\", \"metric_name\", \"metric_value\", \"unit\" FROM analytics.company_financial_metrics WHERE \"company_name\" = 'Apple' AND \"fiscal_year\" BETWEEN 2022 AND 2025 AND \"fiscal_period\" = 'FY' AND \"metric_name\" = 'stockholders_equity' ORDER BY \"fiscal_year\";",
+      "status": "PASS",
+      "checks": {
+        "sql_generated": true,
+        "uses_expected_table": true,
+        "read_only": true,
+        "company": true,
+        "metric": true
+      },
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+metric_name,tag,priority,metric_type
+revenue,RevenueFromContractWithCustomerExcludingAssessedTax,1,duration
+revenue,Revenues,2,duration
+revenue,SalesRevenueNet,3,duration
+net_income,NetIncomeLoss,1,duration
+total_assets,Assets,1,instant
+total_liabilities,Liabilities,1,instant
+stockholders_equity,StockholdersEquity,1,instant
+cash_and_equivalents,CashAndCashEquivalentsAtCarryingValue,1,instant
+cash_and_equivalents,CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents,2,instant
+operating_cash_flow,NetCashProvidedByUsedInOperatingActivities,1,duration

@@ -1,0 +1,1 @@
+CREATE ROLE bedrock_query_role;

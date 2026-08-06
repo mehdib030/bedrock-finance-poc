@@ -1,0 +1,22 @@
+aws_region   = "us-east-1"
+project_name = "sec-bedrock-poc"
+environment  = "poc"
+
+# Pick a capacity supported by your Region/account.
+redshift_base_capacity = 8
+
+# This is used for structured parameter extraction on the advanced path.
+bedrock_model_id = "amazon.nova-lite-v1:0"
+
+create_bedrock_knowledge_base = false
+bootstrap_redshift_schema     = false
+enable_api_gateway            = false
+
+allowed_cors_origins = [
+  "http://localhost:8501"
+]
+
+tags = {
+  Owner      = "your-name"
+  CostCenter = "poc"
+}

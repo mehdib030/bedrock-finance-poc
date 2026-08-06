@@ -1,0 +1,335 @@
+{
+  "row_count": 88,
+  "company_count": 5,
+  "fiscal_year_min": 2023,
+  "fiscal_year_max": 2025,
+  "rows_by_company_year": [
+    {
+      "company_name": "ALPHABET INC.",
+      "fiscal_year": 2023,
+      "metric_count": 7
+    },
+    {
+      "company_name": "ALPHABET INC.",
+      "fiscal_year": 2024,
+      "metric_count": 7
+    },
+    {
+      "company_name": "ALPHABET INC.",
+      "fiscal_year": 2025,
+      "metric_count": 7
+    },
+    {
+      "company_name": "AMAZON COM INC",
+      "fiscal_year": 2023,
+      "metric_count": 6
+    },
+    {
+      "company_name": "AMAZON COM INC",
+      "fiscal_year": 2024,
+      "metric_count": 6
+    },
+    {
+      "company_name": "AMAZON COM INC",
+      "fiscal_year": 2025,
+      "metric_count": 6
+    },
+    {
+      "company_name": "APPLE INC",
+      "fiscal_year": 2024,
+      "metric_count": 7
+    },
+    {
+      "company_name": "APPLE INC",
+      "fiscal_year": 2025,
+      "metric_count": 7
+    },
+    {
+      "company_name": "META PLATFORMS, INC.",
+      "fiscal_year": 2023,
+      "metric_count": 7
+    },
+    {
+      "company_name": "META PLATFORMS, INC.",
+      "fiscal_year": 2024,
+      "metric_count": 7
+    },
+    {
+      "company_name": "META PLATFORMS, INC.",
+      "fiscal_year": 2025,
+      "metric_count": 7
+    },
+    {
+      "company_name": "MICROSOFT CORP",
+      "fiscal_year": 2024,
+      "metric_count": 7
+    },
+    {
+      "company_name": "MICROSOFT CORP",
+      "fiscal_year": 2025,
+      "metric_count": 7
+    }
+  ],
+  "missing_company_year_metrics": [
+    {
+      "company": "Alphabet",
+      "fiscal_year": 2022,
+      "metric_name": "cash_and_equivalents"
+    },
+    {
+      "company": "Alphabet",
+      "fiscal_year": 2022,
+      "metric_name": "net_income"
+    },
+    {
+      "company": "Alphabet",
+      "fiscal_year": 2022,
+      "metric_name": "operating_cash_flow"
+    },
+    {
+      "company": "Alphabet",
+      "fiscal_year": 2022,
+      "metric_name": "revenue"
+    },
+    {
+      "company": "Alphabet",
+      "fiscal_year": 2022,
+      "metric_name": "stockholders_equity"
+    },
+    {
+      "company": "Alphabet",
+      "fiscal_year": 2022,
+      "metric_name": "total_assets"
+    },
+    {
+      "company": "Alphabet",
+      "fiscal_year": 2022,
+      "metric_name": "total_liabilities"
+    },
+    {
+      "company": "Amazon",
+      "fiscal_year": 2022,
+      "metric_name": "cash_and_equivalents"
+    },
+    {
+      "company": "Amazon",
+      "fiscal_year": 2022,
+      "metric_name": "net_income"
+    },
+    {
+      "company": "Amazon",
+      "fiscal_year": 2022,
+      "metric_name": "operating_cash_flow"
+    },
+    {
+      "company": "Amazon",
+      "fiscal_year": 2022,
+      "metric_name": "revenue"
+    },
+    {
+      "company": "Amazon",
+      "fiscal_year": 2022,
+      "metric_name": "stockholders_equity"
+    },
+    {
+      "company": "Amazon",
+      "fiscal_year": 2022,
+      "metric_name": "total_assets"
+    },
+    {
+      "company": "Amazon",
+      "fiscal_year": 2022,
+      "metric_name": "total_liabilities"
+    },
+    {
+      "company": "Amazon",
+      "fiscal_year": 2023,
+      "metric_name": "total_liabilities"
+    },
+    {
+      "company": "Amazon",
+      "fiscal_year": 2024,
+      "metric_name": "total_liabilities"
+    },
+    {
+      "company": "Amazon",
+      "fiscal_year": 2025,
+      "metric_name": "total_liabilities"
+    },
+    {
+      "company": "Apple",
+      "fiscal_year": 2022,
+      "metric_name": "cash_and_equivalents"
+    },
+    {
+      "company": "Apple",
+      "fiscal_year": 2022,
+      "metric_name": "net_income"
+    },
+    {
+      "company": "Apple",
+      "fiscal_year": 2022,
+      "metric_name": "operating_cash_flow"
+    },
+    {
+      "company": "Apple",
+      "fiscal_year": 2022,
+      "metric_name": "revenue"
+    },
+    {
+      "company": "Apple",
+      "fiscal_year": 2022,
+      "metric_name": "stockholders_equity"
+    },
+    {
+      "company": "Apple",
+      "fiscal_year": 2022,
+      "metric_name": "total_assets"
+    },
+    {
+      "company": "Apple",
+      "fiscal_year": 2022,
+      "metric_name": "total_liabilities"
+    },
+    {
+      "company": "Apple",
+      "fiscal_year": 2023,
+      "metric_name": "cash_and_equivalents"
+    },
+    {
+      "company": "Apple",
+      "fiscal_year": 2023,
+      "metric_name": "net_income"
+    },
+    {
+      "company": "Apple",
+      "fiscal_year": 2023,
+      "metric_name": "operating_cash_flow"
+    },
+    {
+      "company": "Apple",
+      "fiscal_year": 2023,
+      "metric_name": "revenue"
+    },
+    {
+      "company": "Apple",
+      "fiscal_year": 2023,
+      "metric_name": "stockholders_equity"
+    },
+    {
+      "company": "Apple",
+      "fiscal_year": 2023,
+      "metric_name": "total_assets"
+    },
+    {
+      "company": "Apple",
+      "fiscal_year": 2023,
+      "metric_name": "total_liabilities"
+    },
+    {
+      "company": "Meta",
+      "fiscal_year": 2022,
+      "metric_name": "cash_and_equivalents"
+    },
+    {
+      "company": "Meta",
+      "fiscal_year": 2022,
+      "metric_name": "net_income"
+    },
+    {
+      "company": "Meta",
+      "fiscal_year": 2022,
+      "metric_name": "operating_cash_flow"
+    },
+    {
+      "company": "Meta",
+      "fiscal_year": 2022,
+      "metric_name": "revenue"
+    },
+    {
+      "company": "Meta",
+      "fiscal_year": 2022,
+      "metric_name": "stockholders_equity"
+    },
+    {
+      "company": "Meta",
+      "fiscal_year": 2022,
+      "metric_name": "total_assets"
+    },
+    {
+      "company": "Meta",
+      "fiscal_year": 2022,
+      "metric_name": "total_liabilities"
+    },
+    {
+      "company": "Microsoft",
+      "fiscal_year": 2022,
+      "metric_name": "cash_and_equivalents"
+    },
+    {
+      "company": "Microsoft",
+      "fiscal_year": 2022,
+      "metric_name": "net_income"
+    },
+    {
+      "company": "Microsoft",
+      "fiscal_year": 2022,
+      "metric_name": "operating_cash_flow"
+    },
+    {
+      "company": "Microsoft",
+      "fiscal_year": 2022,
+      "metric_name": "revenue"
+    },
+    {
+      "company": "Microsoft",
+      "fiscal_year": 2022,
+      "metric_name": "stockholders_equity"
+    },
+    {
+      "company": "Microsoft",
+      "fiscal_year": 2022,
+      "metric_name": "total_assets"
+    },
+    {
+      "company": "Microsoft",
+      "fiscal_year": 2022,
+      "metric_name": "total_liabilities"
+    },
+    {
+      "company": "Microsoft",
+      "fiscal_year": 2023,
+      "metric_name": "cash_and_equivalents"
+    },
+    {
+      "company": "Microsoft",
+      "fiscal_year": 2023,
+      "metric_name": "net_income"
+    },
+    {
+      "company": "Microsoft",
+      "fiscal_year": 2023,
+      "metric_name": "operating_cash_flow"
+    },
+    {
+      "company": "Microsoft",
+      "fiscal_year": 2023,
+      "metric_name": "revenue"
+    },
+    {
+      "company": "Microsoft",
+      "fiscal_year": 2023,
+      "metric_name": "stockholders_equity"
+    },
+    {
+      "company": "Microsoft",
+      "fiscal_year": 2023,
+      "metric_name": "total_assets"
+    },
+    {
+      "company": "Microsoft",
+      "fiscal_year": 2023,
+      "metric_name": "total_liabilities"
+    }
+  ]
+}

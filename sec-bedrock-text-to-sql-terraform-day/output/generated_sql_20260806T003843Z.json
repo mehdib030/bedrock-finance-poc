@@ -1,0 +1,6 @@
+{
+  "generated_at": "20260806T003843Z",
+  "question": "Rank the companies by net-income margin in 2024.",
+  "generated_sql": "SELECT \"company_name\", ROUND((SUM(CASE WHEN \"metric_name\" = 'net_income' THEN \"metric_value\" ELSE 0 END) / SUM(CASE WHEN \"metric_name\" = 'revenue' THEN \"metric_value\" ELSE 0 END)) * 100, 2) AS \"net_income_margin_percent\" FROM analytics.company_financial_metrics WHERE \"fiscal_year\" = 2024 AND \"fiscal_period\" = 'FY' AND \"metric_name\" IN ('net_income', 'revenue') GROUP BY \"company_name\" ORDER BY \"net_income_margin_percent\" DESC;",
+  "executed": false
+}

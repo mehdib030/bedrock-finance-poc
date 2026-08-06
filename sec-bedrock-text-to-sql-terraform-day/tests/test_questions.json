@@ -1,0 +1,55 @@
+[
+  {
+    "id": "BASIC-001",
+    "question": "What was Apple's revenue in 2024?",
+    "expected_company": "Apple",
+    "expected_metric": "revenue",
+    "expected_year": 2024
+  },
+  {
+    "id": "BASIC-002",
+    "question": "Show Microsoft's net income from 2022 through 2025.",
+    "expected_company": "Microsoft",
+    "expected_metric": "net_income",
+    "expected_start_year": 2022,
+    "expected_end_year": 2025
+  },
+  {
+    "id": "BASIC-003",
+    "question": "Compare the five companies by revenue in 2024.",
+    "expected_metric": "revenue",
+    "expected_year": 2024
+  },
+  {
+    "id": "BASIC-004",
+    "question": "What were Amazon's total assets in 2023?",
+    "expected_company": "Amazon",
+    "expected_metric": "total_assets",
+    "expected_year": 2023
+  },
+  {
+    "id": "BASIC-005",
+    "question": "Show Meta's cash and cash equivalents in 2024.",
+    "expected_company": "Meta",
+    "expected_metric": "cash_and_cash_equivalents",
+    "expected_year": 2024
+  },
+  {
+    "id": "BASIC-006",
+    "question": "Which company had the highest operating cash flow in 2024?",
+    "expected_metric": "operating_cash_flow",
+    "expected_year": 2024
+  },
+  {
+    "id": "BASIC-007",
+    "question": "Show Alphabet's total liabilities for 2022 and 2023.",
+    "expected_company": "Alphabet",
+    "expected_metric": "total_liabilities"
+  },
+  {
+    "id": "BASIC-008",
+    "question": "List Apple's stockholders' equity from 2022 through 2025.",
+    "expected_company": "Apple",
+    "expected_metric": "stockholders_equity"
+  }
+]

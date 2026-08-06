@@ -1,0 +1,6 @@
+{
+  "generated_at": "20260806T003723Z",
+  "question": "Calculate Apple's compound annual revenue growth rate from 2022 to 2025.",
+  "generated_sql": "WITH apple_revenue AS (SELECT fiscal_year, metric_value FROM analytics.company_financial_metrics WHERE company_name = 'Apple' AND fiscal_year IN (2022, 2025) AND fiscal_period = 'FY' AND metric_name = 'revenue' ORDER BY fiscal_year) SELECT ROUND(POWER(MAX(CASE WHEN fiscal_year = 2025 THEN metric_value END) / MAX(CASE WHEN fiscal_year = 2022 THEN metric_value END), 1.0 / 3.0) - 1, 4) AS \"cagr_2022_to_2025\" FROM apple_revenue;",
+  "executed": false
+}

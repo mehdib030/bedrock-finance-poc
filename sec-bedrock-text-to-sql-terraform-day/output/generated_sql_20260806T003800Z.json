@@ -1,0 +1,6 @@
+{
+  "generated_at": "20260806T003800Z",
+  "question": "Calculate the average revenue growth of all five companies.",
+  "generated_sql": "SELECT \"company_name\", AVG(\"revenue_growth\") AS \"average_revenue_growth\" FROM (SELECT \"company_name\", \"fiscal_year\", \"metric_value\", LAG(\"metric_value\") OVER (PARTITION BY \"company_name\" ORDER BY \"fiscal_year\") AS \"previous_revenue\", CASE WHEN LAG(\"metric_value\") OVER (PARTITION BY \"company_name\" ORDER BY \"fiscal_year\") IS NOT NULL THEN ((\"metric_value\" - LAG(\"metric_value\") OVER (PARTITION BY \"company_name\" ORDER BY \"fiscal_year\")) / LAG(\"metric_value\") OVER (PARTITION BY \"company_name\" ORDER BY \"fiscal_year\")) * 100 ELSE NULL END AS \"revenue_growth\" FROM analytics.company_financial_metrics WHERE \"metric_name\" = 'revenue' AND \"fiscal_period\" = 'FY' AND \"fiscal_year\" BETWEEN 2023 AND 2025) AS \"growth_calc\" WHERE \"revenue_growth\" IS NOT NULL GROUP BY \"company_name\";",
+  "executed": false
+}

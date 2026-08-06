@@ -1,0 +1,6 @@
+{
+  "generated_at": "20260806T012822Z",
+  "question": "What was Apple revenue in 2024?",
+  "generated_sql": "SELECT \"company_name\", \"fiscal_year\", \"metric_name\", \"metric_value\", \"unit\" FROM analytics.company_financial_metrics WHERE \"company_name\" = 'Apple' AND \"fiscal_year\" = 2024 AND \"fiscal_period\" = 'FY' AND \"metric_name\" = 'revenue' LIMIT 100;",
+  "executed": false
+}

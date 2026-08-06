@@ -1,0 +1,6 @@
+{
+  "generated_at": "20260806T004000Z",
+  "question": "Calculate the correlation between revenue and net income.",
+  "generated_sql": "SELECT CORR(\"revenue\".\"metric_value\", \"net_income\".\"metric_value\") AS \"correlation_between_revenue_and_net_income\" FROM analytics.company_financial_metrics AS \"revenue\" INNER JOIN analytics.company_financial_metrics AS \"net_income\" ON \"revenue\".\"company_name\" = \"net_income\".\"company_name\" AND \"revenue\".\"fiscal_year\" = \"net_income\".\"fiscal_year\" AND \"revenue\".\"fiscal_period\" = \"net_income\".\"fiscal_period\" WHERE \"revenue\".\"metric_name\" = 'revenue' AND \"net_income\".\"metric_name\" = 'net_income' AND \"revenue\".\"fiscal_period\" = 'FY';",
+  "executed": false
+}
