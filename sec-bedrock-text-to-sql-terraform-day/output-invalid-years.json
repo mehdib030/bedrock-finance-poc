@@ -1,0 +1,1 @@
+{"router_request_id": "48943fa7-8e81-4629-9fa4-f1ef482b462e", "router_decision": {"route": "COMPLEX", "template_id": "revenue_cagr"}, "ok": false, "route": "COMPLEX", "request_id": "3ecbc8d4-bc39-4662-8165-1b0c5de16bdb", "error_type": "PARAMETER_VALIDATION_ERROR", "error": "start_year must be earlier than end_year."}

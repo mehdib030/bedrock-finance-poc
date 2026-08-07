@@ -87,3 +87,20 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "bedrock_knowledge_base_arn" {
+  description = "ARN of the structured-data Bedrock Knowledge Base"
+  type        = string
+}
+
+variable "redshift_database" {
+  description = "Redshift database name"
+  type        = string
+  default     = "dev"
+}
+
+variable "allowed_relations" {
+  description = "Comma-separated Redshift relations allowed for generated SQL"
+  type        = string
+  default     = "analytics.company_financial_metrics"
+}

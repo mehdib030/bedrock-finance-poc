@@ -3,6 +3,7 @@ locals {
 
   raw_prefix        = "raw/sec"
   normalized_prefix = "normalized"
+  semantic_prefix   = "semantic"
   templates_prefix  = "templates/sql"
   evaluation_prefix = "evaluation"
 

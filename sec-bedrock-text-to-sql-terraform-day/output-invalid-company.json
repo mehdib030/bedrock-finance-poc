@@ -1,0 +1,1 @@
+{"router_request_id": "6dcdf557-9f9a-461b-b264-0e4053d965c4", "router_decision": {"route": "COMPLEX", "template_id": "revenue_cagr"}, "ok": false, "route": "COMPLEX", "request_id": "9a15ac46-46b4-4369-8376-9ed6de8a4091", "error_type": "PARAMETER_VALIDATION_ERROR", "error": "Company must be Apple, Microsoft, Amazon, Alphabet or Meta."}

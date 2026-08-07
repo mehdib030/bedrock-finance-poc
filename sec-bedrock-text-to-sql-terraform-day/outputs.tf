@@ -10,6 +10,10 @@ output "normalized_data_prefix" {
   value = "s3://${aws_s3_bucket.data.id}/${local.normalized_prefix}/"
 }
 
+output "semantic_data_prefix" {
+  value = "s3://${aws_s3_bucket.data.id}/${local.semantic_prefix}/"
+}
+
 output "template_registry_prefix" {
   value = "s3://${aws_s3_bucket.data.id}/${local.templates_prefix}/"
 }
@@ -44,7 +48,7 @@ output "api_endpoint" {
 }
 
 output "lambda_function_name" {
-  value = aws_lambda_function.app.function_name
+  value = aws_lambda_function.router.function_name
 }
 
 output "aws_region" {

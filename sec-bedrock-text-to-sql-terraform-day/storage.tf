@@ -51,6 +51,7 @@ resource "aws_s3_object" "prefixes" {
   for_each = toset([
     "${local.raw_prefix}/.keep",
     "${local.normalized_prefix}/.keep",
+    "${local.semantic_prefix}/.keep",
     "${local.evaluation_prefix}/.keep"
   ])
 
