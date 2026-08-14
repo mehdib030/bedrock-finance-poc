@@ -1,0 +1,30 @@
+BASIC
+
+aws lambda invoke   --function-name sec-bedrock-poc-router   --cli-binary-format raw-in-base64-out   --payload '{"question":"Compare Apple and Microsoft revenue in 2024."}'   output-router-basic-comparison.json
+
+aws lambda invoke   --function-name sec-bedrock-poc-router   --cli-binary-format raw-in-base64-out   --payload '{"question":"What was the revenue for APPLE INC in 2024"}'   output-router-basic-comparison.json
+
+
+cat output-router-basic-comparison.json | python -m json.tool
+
+UNSUPPORTED:
+
+aws lambda invoke   --function-name sec-bedrock-poc-router   --cli-binary-format raw-in-base64-out   --payload '{"question":"Forecast Apple revenue for 2026."}'   output-router-unsupported.json
+
+COMPLEX:
+
+aws lambda invoke   --function-name sec-bedrock-poc-router   --cli-binary-format raw-in-base64-out   --payload '{"question":"What was Apple revenue CAGR from 2022 to 2025?"}'   output-router-complex.json
+
+
+cat output-router-complex.json | python -m json.tool
+
+
+Cloudwatch:
+
+MSYS_NO_PATHCONV=1 aws logs tail   /aws/lambda/sec-bedrock-poc-router   --since 15m --follow
+
+
+MSYS_NO_PATHCONV=1 aws logs tail   /aws/lambda/sec-bedrock-poc-basic-query   --since 15m --follow
+
+
+MSYS_NO_PATHCONV=1 aws logs tail   /aws/lambda/sec-bedrock-poc-complex-query   --since 15m --follow

@@ -1,0 +1,114 @@
+Demo script:
+
+Preflight Commands:
+
+pwd
+
+git rev-parse --show-toplevel
+
+aws sts get-caller-identity
+
+Run: Verify the three Lambda functions.
+
+aws lambda get-function   --function-name sec-bedrock-poc-router   --query "Configuration.FunctionName"   --output text
+
+aws lambda get-function   --function-name sec-bedrock-poc-basic-query   --query "Configuration.FunctionName"   --output text
+
+aws lambda get-function   --function-name sec-bedrock-poc-complex-query   --query "Configuration.FunctionName"   --output text
+
+Run: Verify the Complex Lambda model configuration.
+
+aws lambda get-function-configuration   --function-name sec-bedrock-poc-complex-query   --query "Environment.Variables.BEDROCK_MODEL_ID"   --output text
+
+Run: Verify Redshift Serverless is available.
+
+aws redshift-serverless get-workgroup   --workgroup-name sec-bedrock-poc-poc-wg   --query "workgroup.status"   --output text
+
+Run: Optional — verify the Basic SQL validator tests.
+
+python -m unittest tests/test_sql_validator.py -v
+
+Expected: SELECT/CTE allowed; DROP, multiple statements, unauthorized/system relations, and excessive LIMIT rejected.
+
+Pre-Demo Redshift Sanity Check
+
+Run: Use only if you want to verify the semantic view before the audience joins.
+
+STATEMENT_ID=$(aws redshift-data execute-statement   --workgroup-name sec-bedrock-poc-poc-wg   --database dev   --sql "SELECT * FROM bedrock.company_financial_metrics LIMIT 20"   --query Id   --output text)
+
+
+echo "$STATEMENT_ID"
+
+
+aws redshift-data describe-statement   --id "$STATEMENT_ID"   --query Status   --output text
+
+
+aws redshift-data get-statement-result   --id "$STATEMENT_ID"
+
+Warning: If describe-statement is not FINISHED yet, check it again before get-statement-result. Do not troubleshoot data loading during the presentation.
+
+9. Live Demo #1 — BASIC / Generated-SQL Path
+
+Run: Question: "What was Apple revenue in 2024?"
+
+aws lambda invoke   --function-name sec-bedrock-poc-router   --cli-binary-format raw-in-base64-out   --payload '{"question":"What was Apple revenue in 2024?"}'   output-router-basic.json
+
+
+cat output-router-basic.json | python -m json.tool
+
+Point out: router_decision.route = BASIC; generated_sql; validated_sql; statement_id; row_count; rows.
+
+
+10. Optional BASIC Comparison
+
+aws lambda invoke   --function-name sec-bedrock-poc-router   --cli-binary-format raw-in-base64-out   --payload '{"question":"Compare Apple and Microsoft revenue in 2024."}'   output-router-basic-comparison.json
+
+
+cat output-router-basic-comparison.json | python -m json.tool
+
+Use only if: The first BASIC demo is clean and you have enough time.
+
+11. Live Demo #2 — COMPLEX / Controlled-Template Path
+
+Say: Now I will show the controlled-template path. In this POC, CAGR is routed to the COMPLEX path. Bedrock does not generate the SQL. It extracts the parameters, the application validates them, and the application selects the approved revenue_cagr template.
+
+Run: Question: "What was Apple revenue CAGR from 2022 to 2025?"
+
+aws lambda invoke   --function-name sec-bedrock-poc-router   --cli-binary-format raw-in-base64-out   --payload '{"question":"What was Apple revenue CAGR from 2022 to 2025?"}'   output-router-complex.json
+
+
+cat output-router-complex.json | python -m json.tool
+
+Point out: router_decision.route = COMPLEX; template_id = revenue_cagr; validated_parameters; statement_id; rows.
+
+Say: This path demonstrates a useful governance principle: the model can interpret the user's request, but the application owns the optimized SQL.
+
+Warning: If the CAGR row contains null values because one endpoint is missing in the demo data, do not debug live. Emphasize the routing, validated parameters, template ID, and execution control, or show a previously successful output.
+
+12. Live Demo #3 — Unsupported Request
+
+Say: The Router also allows us to reject requests outside the approved POC scope before SQL is generated or executed.
+
+aws lambda invoke   --function-name sec-bedrock-poc-router   --cli-binary-format raw-in-base64-out   --payload '{"question":"Forecast Apple revenue for 2026."}'   output-router-unsupported.json
+
+
+cat output-router-unsupported.json | python -m json.tool
+
+Point out: route = UNSUPPORTED; ok = false; no Redshift execution.
+
+13. CloudWatch — Show the Control Flow
+
+Run: Because you use Bash/MSYS on Windows, keep MSYS_NO_PATHCONV=1 for log-group paths.
+
+MSYS_NO_PATHCONV=1 aws logs tail   /aws/lambda/sec-bedrock-poc-router   --since 15m
+
+
+MSYS_NO_PATHCONV=1 aws logs tail   /aws/lambda/sec-bedrock-poc-basic-query   --since 15m
+
+
+MSYS_NO_PATHCONV=1 aws logs tail   /aws/lambda/sec-bedrock-poc-complex-query   --since 15m
+
+Point out: Router: route selection. BASIC: question_received → sql_generated → sql_validated. COMPLEX: parameters_extracted → parameters_validated.
+
+Warning: Do not use --follow during the live demo unless it is in a separate terminal; --follow intentionally blocks like tail -f.
+

@@ -1,0 +1,28 @@
+Standards:
+
+Security:
+Generated Query Validation: No DELETE, UPDATE, DROP ... ONLY SELECT
+Parameters validation:  Missing parameters, unknown parameter, wrong dates ...
+Model output validation: output parameters validation
+IAM Roles/Policies: least privelege
+Bedrock Guardrails: prompt injection, PII, content filtering, denied topics
+Database Access Standard: Define users and what they can do. SELECT only on views not the actual tables (Read-only policy)
+Verify authentication and authorization (id/access token)
+All Federal Reserve Terraform code goes CMS
+
+System prompt rules: standard SQL, e.g. no PL/SQL, Oracle SQL
+Catalog System Prompts: used for auditing purposes in case the prompt changed, or other issues resulting from changing the prompt, can be restore to previous version
+
+Measure for correctness, performance ...
+Baseline: create 50-100 questions and measure and save results. If the model changes rerun against the same set of questions.
+          Does it still perform against provisioned query timeout value?
+
+Observability
+Log/auditing: CloudWatch/Cloudtrail, log routing, correlation ids, FRISS compliant logs ... just like on-prem
+
+Architecture
+Terrafom code
+Lambda code
+
+
+
