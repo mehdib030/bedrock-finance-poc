@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-08-14T00:00:00.000Z" agent="ChatGPT" version="24.7.17" type="device" compressed="false">
+<diagram id="layered-controls" name="Layered Controls">
+<mxGraphModel dx="1600" dy="920" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="920" math="0" shadow="0">
+<root>
+<mxCell id="0"/>
+<mxCell id="1" parent="0"/>
+<mxCell id="title" parent="1" value="Layered Controls" style="text;html=1;whiteSpace=wrap;rounded=0;fontSize=34;fontColor=#0B1F44;align=left;verticalAlign=middle;fontStyle=1;" vertex="1"><mxGeometry x="35" y="25" width="700" height="60" as="geometry"/></mxCell>
+<mxCell id="l1" parent="1" value="&lt;b&gt;1. System instructions / prompts&lt;/b&gt;&lt;br/&gt;&lt;font style='font-size:15px'&gt;Guide model behavior&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#1D4ED8;strokeWidth=2;fontColor=#0B1F44;fontSize=18;align=left;verticalAlign=middle;arcSize=12;" vertex="1"><mxGeometry x="170" y="130" width="880" height="110" as="geometry"/></mxCell>
+<mxCell id="l2" parent="1" value="&lt;b&gt;2. Amazon Bedrock Guardrails&lt;/b&gt;&lt;br/&gt;&lt;font style='font-size:15px'&gt;Prompt attacks • denied topics • sensitive information&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDFA;strokeColor=#0F9D8A;strokeWidth=2;fontColor=#0B1F44;fontSize=18;align=left;verticalAlign=middle;arcSize=12;" vertex="1"><mxGeometry x="170" y="285" width="880" height="110" as="geometry"/></mxCell>
+<mxCell id="l3" parent="1" value="&lt;b&gt;3. SQL Validator / Parameter Validator&lt;/b&gt;&lt;br/&gt;&lt;font style='font-size:15px'&gt;Deterministic application enforcement&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F3FF;strokeColor=#6D28D9;strokeWidth=2;fontColor=#0B1F44;fontSize=18;align=left;verticalAlign=middle;arcSize=12;" vertex="1"><mxGeometry x="170" y="440" width="880" height="110" as="geometry"/></mxCell>
+<mxCell id="l4" parent="1" value="&lt;b&gt;4. IAM + Redshift database privileges&lt;/b&gt;&lt;br/&gt;&lt;font style='font-size:15px'&gt;Least privilege / read-only authorization&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#EA580C;strokeWidth=2;fontColor=#0B1F44;fontSize=18;align=left;verticalAlign=middle;arcSize=12;" vertex="1"><mxGeometry x="170" y="595" width="880" height="110" as="geometry"/></mxCell>
+<mxCell id="l5" parent="1" value="&lt;b&gt;5. Redshift Serverless execution&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#1D4ED8;strokeWidth=2;fontColor=#0B1F44;fontSize=18;align=left;verticalAlign=middle;arcSize=12;" vertex="1"><mxGeometry x="170" y="750" width="880" height="110" as="geometry"/></mxCell>
+<mxCell id="el1" parent="1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2.0;strokeColor=#0B1F44;endArrow=block;endFill=1;" edge="1" source="l1" target="l2"><mxGeometry relative="1" as="geometry"/></mxCell>
+<mxCell id="el2" parent="1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2.0;strokeColor=#0B1F44;endArrow=block;endFill=1;" edge="1" source="l2" target="l3"><mxGeometry relative="1" as="geometry"/></mxCell>
+<mxCell id="el3" parent="1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2.0;strokeColor=#0B1F44;endArrow=block;endFill=1;" edge="1" source="l3" target="l4"><mxGeometry relative="1" as="geometry"/></mxCell>
+<mxCell id="el4" parent="1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2.0;strokeColor=#0B1F44;endArrow=block;endFill=1;" edge="1" source="l4" target="l5"><mxGeometry relative="1" as="geometry"/></mxCell>
+<mxCell id="callout" parent="1" value="&lt;b&gt;!&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Guardrails do not replace deterministic validation or database authorization.&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0B1F44;strokeWidth=2.2;fontColor=#0B1F44;fontSize=18;align=center;verticalAlign=middle;arcSize=12;" vertex="1"><mxGeometry x="1120" y="390" width="380" height="250" as="geometry"/></mxCell>
+</root>
+</mxGraphModel>
+</diagram>
+</mxfile>

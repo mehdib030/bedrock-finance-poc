@@ -1,0 +1,245 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" modified="2026-08-06T14:45:00.000000+00:00" agent="ChatGPT" version="24.7.17" type="device">
+  <diagram id="final-poc-architecture" name="Final POC Architecture">
+    <mxGraphModel dx="2000" dy="1380" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2000" pageHeight="1380" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Final Amazon Bedrock Text-to-SQL POC — AWS Architecture" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=28;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="250" y="20" width="1500" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Demo entry point: Lambda test event | Three Lambda functions | IAM role or calling principal shown on each AWS resource" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#5F6B7A;" vertex="1" parent="1">
+          <mxGeometry x="300" y="68" width="1400" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="user" value="&lt;b&gt;Demo User / Operator&lt;/b&gt;&lt;br/&gt;AWS Lambda test event&lt;br/&gt;&lt;font style=&quot;font-size:11px;font-weight:normal&quot;&gt;Caller identity: current AWS CLI / console IAM principal&lt;br/&gt;Required permission: lambda:InvokeFunction on Router&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5F6B7A;strokeWidth=2;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="145" width="250" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="router" value="&lt;b&gt;AWS Lambda&lt;/b&gt;&lt;br/&gt;Router Lambda&lt;br/&gt;&lt;font style=&quot;font-size:11px;font-weight:normal&quot;&gt;Classifies BASIC, COMPLEX, or UNSUPPORTED&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Execution role:&lt;/b&gt;&lt;br/&gt;sec-bedrock-poc-router-role&lt;br/&gt;&lt;b&gt;Access:&lt;/b&gt; invoke Basic/Complex Lambdas + write logs&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF9900;strokeColor=#B36B00;strokeWidth=2;fontColor=#232F3E;fontSize=17;fontStyle=1;verticalAlign=top;spacingTop=12;" vertex="1" parent="1">
+          <mxGeometry x="340" y="120" width="280" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="decision" value="Route?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#232F3E;strokeWidth=2;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="675" y="155" width="110" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="unsupported" value="&lt;b&gt;UNSUPPORTED&lt;/b&gt;&lt;br/&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Handled by Router Lambda&lt;br/&gt;Role: sec-bedrock-poc-router-role&lt;br/&gt;Return safe error&lt;br/&gt;No SQL and no Redshift call&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#B91C1C;strokeWidth=2;fontColor=#7F1D1D;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="625" y="345" width="225" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="basic_group" value="BASIC PATH" style="swimlane;html=1;rounded=1;startSize=36;fillColor=#FFF4E5;swimlaneFillColor=#FFF4E5;strokeColor=#D97706;strokeWidth=2;fontSize=17;fontStyle=1;horizontal=1;" vertex="1" parent="1">
+          <mxGeometry x="880" y="110" width="390" height="410" as="geometry" />
+        </mxCell>
+        <mxCell id="basic_lambda_label" value="&lt;b&gt;AWS Lambda — Basic Query Lambda&lt;/b&gt;&lt;br/&gt;&lt;font style=&quot;font-size:11px;font-weight:normal&quot;&gt;&lt;b&gt;Execution role:&lt;/b&gt; sec-bedrock-poc-basic-query-role&lt;br/&gt;GenerateQuery + Redshift Data API + CloudWatch Logs&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF9900;strokeColor=#B36B00;strokeWidth=2;fontColor=#232F3E;fontSize=17;fontStyle=1;verticalAlign=top;spacingTop=12;" vertex="1" parent="1">
+          <mxGeometry x="910" y="155" width="330" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="basic_step1" value="1. Receive natural-language question" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7E6;strokeColor=#C97A00;fontSize=13;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="915" y="238" width="320" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="basic_step2" value="2. Call Bedrock GenerateQuery" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7E6;strokeColor=#C97A00;fontSize=13;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="915" y="283" width="320" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="basic_step3" value="&lt;b&gt;3. Basic SQL validator&lt;/b&gt;&lt;br/&gt;&lt;font style=&quot;font-size:11px&quot;&gt;SELECT only, one statement, allowlisted objects, LIMIT&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7E6;strokeColor=#C97A00;fontSize=13;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="915" y="328" width="320" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="basic_step4" value="4. Send validated SQL to Redshift Data API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7E6;strokeColor=#C97A00;fontSize=13;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="915" y="396" width="320" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="complex_group" value="COMPLEX PATH" style="swimlane;html=1;rounded=1;startSize=36;fillColor=#F7EEFF;swimlaneFillColor=#F7EEFF;strokeColor=#7E22CE;strokeWidth=2;fontSize=17;fontStyle=1;horizontal=1;" vertex="1" parent="1">
+          <mxGeometry x="880" y="545" width="390" height="425" as="geometry" />
+        </mxCell>
+        <mxCell id="complex_lambda_label" value="&lt;b&gt;AWS Lambda — Complex Query Lambda&lt;/b&gt;&lt;br/&gt;&lt;font style=&quot;font-size:11px;font-weight:normal&quot;&gt;&lt;b&gt;Execution role:&lt;/b&gt; sec-bedrock-poc-complex-query-role&lt;br/&gt;InvokeModel + Redshift Data API + CloudWatch Logs&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF9900;strokeColor=#B36B00;strokeWidth=2;fontColor=#232F3E;fontSize=17;fontStyle=1;verticalAlign=top;spacingTop=12;" vertex="1" parent="1">
+          <mxGeometry x="910" y="590" width="330" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="complex_step1" value="1. Receive question + approved template ID" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F7F0FF;strokeColor=#8B5CF6;fontSize=13;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="915" y="673" width="320" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="complex_step2" value="2. Call Bedrock model to extract parameters only" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F7F0FF;strokeColor=#8B5CF6;fontSize=13;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="915" y="718" width="320" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="complex_step3" value="&lt;b&gt;3. Complex parameter validator&lt;/b&gt;&lt;br/&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Required fields, company, dates, ranges, no extras&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F7F0FF;strokeColor=#8B5CF6;fontSize=13;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="915" y="770" width="320" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="complex_step4" value="&lt;b&gt;4. SQL template registry&lt;/b&gt;&lt;br/&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Application-owned revenue CAGR template&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F7F0FF;strokeColor=#8B5CF6;fontSize=13;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="915" y="838" width="320" height="58" as="geometry" />
+        </mxCell>
+        <mxCell id="complex_step5" value="5. Send template + validated parameters to Data API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F7F0FF;strokeColor=#8B5CF6;fontSize=13;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="915" y="903" width="320" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="kb" value="&lt;b&gt;Amazon Bedrock&lt;/b&gt;&lt;br/&gt;Structured-data Knowledge Base&lt;br/&gt;&lt;font style=&quot;font-size:11px;font-weight:normal&quot;&gt;GenerateQuery / TEXT_TO_SQL&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Service role:&lt;/b&gt;&lt;br/&gt;AmazonBedrockExecutionRoleForKnowledgeBase_166bw&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9D5FF;strokeColor=#7E22CE;strokeWidth=2;fontColor=#3B0764;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="100" width="285" height="165" as="geometry" />
+        </mxCell>
+        <mxCell id="model" value="&lt;b&gt;Amazon Bedrock Runtime&lt;/b&gt;&lt;br/&gt;Foundation model via Converse&lt;br/&gt;&lt;font style=&quot;font-size:11px;font-weight:normal&quot;&gt;Extract parameters only — no SQL&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Calling principal:&lt;/b&gt;&lt;br/&gt;sec-bedrock-poc-complex-query-role&lt;br/&gt;No separate Bedrock Runtime service role&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9D5FF;strokeColor=#7E22CE;strokeWidth=2;fontColor=#3B0764;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="585" width="285" height="155" as="geometry" />
+        </mxCell>
+        <mxCell id="data_api" value="&lt;b&gt;Amazon Redshift Data API&lt;/b&gt;&lt;br/&gt;&lt;font style=&quot;font-size:11px;font-weight:normal&quot;&gt;ExecuteStatement / DescribeStatement&lt;br/&gt;GetStatementResult / CancelStatement&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Calling principals:&lt;/b&gt;&lt;br/&gt;sec-bedrock-poc-basic-query-role&lt;br/&gt;sec-bedrock-poc-complex-query-role&lt;br/&gt;No separate Data API service role&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE7F3;strokeColor=#BE185D;strokeWidth=2;fontColor=#831843;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1335" y="325" width="270" height="195" as="geometry" />
+        </mxCell>
+        <mxCell id="redshift" value="&lt;b&gt;Amazon Redshift Serverless&lt;/b&gt;&lt;br/&gt;&lt;font style=&quot;font-size:11px;font-weight:normal&quot;&gt;Workgroup: sec-bedrock-poc-poc-wg&lt;br/&gt;&lt;b&gt;analytics&lt;/b&gt;: physical table | &lt;b&gt;bedrock&lt;/b&gt;: semantic view&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Runtime IAM database users:&lt;/b&gt;&lt;br/&gt;IAMR:sec-bedrock-poc-basic-query-role&lt;br/&gt;IAMR:sec-bedrock-poc-complex-query-role&lt;br/&gt;&lt;b&gt;Knowledge Base database user:&lt;/b&gt;&lt;br/&gt;IAMR:AmazonBedrockExecutionRoleForKnowledgeBase_166bw&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE7F3;strokeColor=#BE185D;strokeWidth=2;fontColor=#831843;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1660" y="295" width="300" height="245" as="geometry" />
+        </mxCell>
+        <mxCell id="catalog" value="&lt;b&gt;AWS Glue Data Catalog&lt;/b&gt;&lt;br/&gt;&lt;font style=&quot;font-size:11px;font-weight:normal&quot;&gt;Default metadata catalog used by the structured Knowledge Base&lt;br/&gt;&lt;b&gt;Not&lt;/b&gt; a Glue ETL job or crawler&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Access principal:&lt;/b&gt;&lt;br/&gt;AmazonBedrockExecutionRoleForKnowledgeBase_166bw&lt;br/&gt;Glue GetDatabase / GetTable metadata permissions&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0369A1;strokeWidth=2;fontColor=#0C4A6E;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="780" width="305" height="175" as="geometry" />
+        </mxCell>
+        <mxCell id="lakeformation" value="&lt;b&gt;AWS Lake Formation&lt;/b&gt;&lt;br/&gt;&lt;font style=&quot;font-size:11px;font-weight:normal&quot;&gt;Authorizes access to catalog database/table metadata&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Granted principal:&lt;/b&gt;&lt;br/&gt;AmazonBedrockExecutionRoleForKnowledgeBase_166bw&lt;br/&gt;&lt;b&gt;Grants:&lt;/b&gt; DESCRIBE + SELECT&lt;br/&gt;&lt;b&gt;IAM:&lt;/b&gt; lakeformation:GetDataAccess&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0369A1;strokeWidth=2;fontColor=#0C4A6E;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1650" y="760" width="310" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="cloudwatch" value="&lt;b&gt;Amazon CloudWatch Logs&lt;/b&gt;&lt;br/&gt;&lt;font style=&quot;font-size:11px;font-weight:normal&quot;&gt;Router decision, SQL/template ID, validation outcome, execution status&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Writing principals:&lt;/b&gt;&lt;br/&gt;sec-bedrock-poc-router-role&lt;br/&gt;sec-bedrock-poc-basic-query-role&lt;br/&gt;sec-bedrock-poc-complex-query-role&lt;br/&gt;Managed policy: AWSLambdaBasicExecutionRole&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0369A1;strokeWidth=2;fontColor=#0C4A6E;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="995" width="305" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="iam" value="&lt;b&gt;AWS IAM — identity map&lt;/b&gt;&lt;br/&gt;&lt;font style=&quot;font-size:11px;font-weight:normal&quot;&gt;&lt;b&gt;Router:&lt;/b&gt; sec-bedrock-poc-router-role&lt;br/&gt;&lt;b&gt;Basic:&lt;/b&gt; sec-bedrock-poc-basic-query-role&lt;br/&gt;&lt;b&gt;Complex:&lt;/b&gt; sec-bedrock-poc-complex-query-role&lt;br/&gt;&lt;b&gt;Knowledge Base:&lt;/b&gt;&lt;br/&gt;AmazonBedrockExecutionRoleForKnowledgeBase_166bw&lt;br/&gt;&lt;br/&gt;The Data API, Bedrock Runtime, Glue Catalog, Lake Formation, and CloudWatch use these calling principals; they do not each require a separate execution role.&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F4F6;strokeColor=#4B5563;strokeWidth=2;fontColor=#111827;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1650" y="985" width="310" height="205" as="geometry" />
+        </mxCell>
+        <mxCell id="secdata" value="&lt;b&gt;SEC Public Data&lt;/b&gt;&lt;br/&gt;&lt;font style=&quot;font-size:11px;font-weight:normal&quot;&gt;Public HTTPS source&lt;br/&gt;No AWS IAM role&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5F6B7A;strokeWidth=2;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1015" width="215" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="s3" value="&lt;b&gt;Amazon S3&lt;/b&gt;&lt;br/&gt;POC data lake&lt;br/&gt;&lt;font style=&quot;font-size:11px;font-weight:normal&quot;&gt;&lt;b&gt;Load-time principal:&lt;/b&gt;&lt;br/&gt;existing deployment/data-load IAM identity&lt;br/&gt;No runtime Lambda access required&lt;/font&gt;" style="shape=cylinder;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;fillColor=#DCFCE7;strokeColor=#15803D;strokeWidth=2;fontColor=#14532D;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="310" y="1000" width="235" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="normalize" value="&lt;b&gt;Normalization / Load&lt;/b&gt;&lt;br/&gt;&lt;font style=&quot;font-size:11px;font-weight:normal&quot;&gt;Python + Redshift load process&lt;br/&gt;Completed before runtime demo&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Execution identity:&lt;/b&gt;&lt;br/&gt;operator/deployment IAM principal&lt;br/&gt;(or existing Redshift S3 load role for COPY)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0369A1;strokeWidth=2;fontColor=#0C4A6E;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="995" width="250" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="note1" value="&lt;b&gt;POC boundary&lt;/b&gt;&lt;br/&gt;Validators are Python modules packaged inside the Basic and Complex Lambdas. They are not separate Lambda functions." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#FFF7D6;strokeColor=#C59B18;fontSize=14;fontColor=#4A3B00;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1210" width="450" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="note2" value="&lt;b&gt;Why Glue appears&lt;/b&gt;&lt;br/&gt;The current Knowledge Base uses the default Glue Data Catalog as its structured metadata store, Lake Formation for permissions, and Redshift Serverless as the query engine. No Glue ETL job is required." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#FFF7D6;strokeColor=#C59B18;fontSize=14;fontColor=#4A3B00;" vertex="1" parent="1">
+          <mxGeometry x="520" y="1210" width="500" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" value="&lt;b&gt;Legend&lt;/b&gt;&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Solid arrow = runtime request/query flow&lt;br/&gt;Dashed arrow = metadata, permissions, logging, or pre-load flow&lt;/font&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#FFF7D6;strokeColor=#C59B18;fontSize=14;fontColor=#4A3B00;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="1210" width="450" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="e_user_router" value="Question" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;" edge="1" parent="1" source="user" target="router">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_router_decision" value="Classify" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;" edge="1" parent="1" source="router" target="decision">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_decision_basic" value="BASIC" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;" edge="1" parent="1" source="decision" target="basic_group">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="825" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_decision_complex" value="COMPLEX" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;" edge="1" parent="1" source="decision" target="complex_group">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="825" y="700" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_decision_unsupported" value="UNSUPPORTED" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;" edge="1" parent="1" source="decision" target="unsupported">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_unsupported_user" value="Safe response" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#B91C1C;dashed=1;" edge="1" parent="1" source="unsupported" target="user">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="400" y="390" />
+              <mxPoint x="400" y="255" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_basic_kb" value="Natural language question" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;" edge="1" parent="1" source="basic_step2" target="kb">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1285" y="300" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_kb_basic" value="Generated SQL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#7E22CE;" edge="1" parent="1" source="kb" target="basic_step3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1290" y="350" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_complex_model" value="Question" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;" edge="1" parent="1" source="complex_step2" target="model">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1288" y="740" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_model_complex" value="JSON parameters" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#7E22CE;" edge="1" parent="1" source="model" target="complex_step3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1290" y="805" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_basic_api" value="Validated SQL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;" edge="1" parent="1" source="basic_step4" target="data_api">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_complex_api" value="Approved SQL + parameters" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;" edge="1" parent="1" source="complex_step5" target="data_api">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_api_redshift" value="Execute and retrieve results" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;" edge="1" parent="1" source="data_api" target="redshift">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_redshift_router" value="Rows returned through processing Lambda" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#BE185D;dashed=1;" edge="1" parent="1" source="redshift" target="router">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1635" y="565" />
+              <mxPoint x="1500" y="565" />
+              <mxPoint x="1500" y="60" />
+              <mxPoint x="480" y="60" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_kb_catalog" value="Read database/table metadata" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;dashed=1;strokeColor=#64748B;" edge="1" parent="1" source="kb" target="catalog">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_catalog_redshift" value="Catalog objects available to query engine" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;dashed=1;strokeColor=#64748B;" edge="1" parent="1" source="catalog" target="redshift">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sec_s3" value="Download" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;dashed=1;strokeColor=#64748B;" edge="1" parent="1" source="secdata" target="s3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_s3_normalize" value="Raw files" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;dashed=1;strokeColor=#64748B;" edge="1" parent="1" source="s3" target="normalize">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_normalize_redshift" value="Normalized data load" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;dashed=1;strokeColor=#64748B;" edge="1" parent="1" source="normalize" target="redshift">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="900" y="1060" />
+              <mxPoint x="1810" y="1060" />
+              <mxPoint x="1810" y="565" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_router_cw" value="Logs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;dashed=1;strokeColor=#64748B;" edge="1" parent="1" source="router" target="cloudwatch">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="640" y="315" />
+              <mxPoint x="1275" y="315" />
+              <mxPoint x="1275" y="1030" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_basic_cw" value="Logs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;dashed=1;strokeColor=#64748B;" edge="1" parent="1" source="basic_group" target="cloudwatch">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1290" y="500" />
+              <mxPoint x="1290" y="1035" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_complex_cw" value="Logs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;dashed=1;strokeColor=#64748B;" edge="1" parent="1" source="complex_group" target="cloudwatch">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1285" y="960" />
+              <mxPoint x="1285" y="1070" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_kb_redshift" value="Query engine connection / IAM authentication" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;dashed=1;strokeColor=#64748B;" edge="1" parent="1" source="kb" target="redshift">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1625" y="215" />
+              <mxPoint x="1625" y="330" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_lf_catalog" value="DESCRIBE / SELECT grants" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;dashed=1;strokeColor=#0369A1;" edge="1" parent="1" source="lakeformation" target="catalog">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
